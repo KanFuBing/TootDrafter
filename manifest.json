@@ -1,0 +1,26 @@
+{
+    "name": "Toot Drafter",
+    "version": "0.1.0",
+    "author": "@fuhyou@mstdn.jp",
+    "description": "Toot Drafter automatically saves your draft and restores it after reloading.",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "./background.js"
+    },
+    "icons": {
+        "16": "/images/icon16.png",
+        "48": "/images/icon48.png",
+        "128": "/images/icon128.png"
+    },
+    "host_permissions": [
+        "*://*/*"
+    ],
+    "permissions": [
+        "scripting",
+        "tabs"
+    ],
+    "action": {
+        "default_title": "Toot Drafter",
+        "default_popup": "popup.html"
+    }
+}
