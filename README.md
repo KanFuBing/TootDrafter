@@ -11,4 +11,4 @@ No manual operation required. Toot Drafter automatically saves your draft and re
 
 It searches for the toot-inputing `textarea` as well as toot `button` by injecting `script` after each page loads, so as to judge if it is a Web interface for Mastodon.
 
-If so, it calls the native `textarea` setter and triggers `input` event to sync the `textarea` with `localStorage`. Then writes `localStorage` once the user inputs. Removes the draft if toot `button` is clicked.
+If so, it calls the native `textarea` setter and triggers `input` event to sync the `textarea` with `localStorage`. Then writes `localStorage` once user input is detected through `MutationObserver`. Removes the draft if toot `button` is clicked.

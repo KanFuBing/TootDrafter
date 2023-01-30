@@ -10,10 +10,12 @@ mountDrafter = () => {
     textareaSetter.call(draftTextarea, localStorage.getItem(STORAGE_DRAFT_KEY))
     draftTextarea.dispatchEvent(new Event('input', { bubbles: true }))
 
-    draftTextarea.addEventListener('change', event => {
-        localStorage.setItem(STORAGE_DRAFT_KEY, event.target.value)
-    })
- 
+    // save content through Mutation Observer to listen to change by both the user & React
+    new MutationObserver(() => { 
+        localStorage.setItem(STORAGE_DRAFT_KEY, draftTextarea.value) 
+    }).observe(draftTextarea, { childList: true })
+
+    // delete after sended
     tootBtn.addEventListener('click', () => {
         localStorage.removeItem(STORAGE_DRAFT_KEY)
     })

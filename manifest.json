@@ -1,6 +1,6 @@
 {
     "name": "Toot Drafter",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "author": "@fuhyou@mstdn.jp",
     "description": "Toot Drafter automatically saves your draft and restores it after reloading.",
     "manifest_version": 3,
