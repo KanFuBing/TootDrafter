@@ -1,6 +1,7 @@
 container = document.querySelector('div[id="mastodon"]')
 draftTextarea = container?.querySelector('textarea[class="autosuggest-textarea__textarea"][dir="auto"][aria-autocomplete="list"]')
 tootBtn = container?.querySelector('button[class="button button--block"]')
+notificationList = container?.querySelector('div[class="notification-list"]')
 
 mountDrafter = () => {
     const STORAGE_DRAFT_KEY = 'tootdrafter_draft'
@@ -10,10 +11,11 @@ mountDrafter = () => {
     textareaSetter.call(draftTextarea, localStorage.getItem(STORAGE_DRAFT_KEY))
     draftTextarea.dispatchEvent(new Event('input', { bubbles: true }))
 
+    const save =()=>localStorage.setItem(STORAGE_DRAFT_KEY, draftTextarea.value)
     // save content through Mutation Observer to listen to change by both the user & React
-    new MutationObserver(() => { 
-        localStorage.setItem(STORAGE_DRAFT_KEY, draftTextarea.value) 
-    }).observe(draftTextarea, { childList: true })
+    new MutationObserver(save).observe(draftTextarea, { childList: true })
+    // also save when upload fails
+    new MutationObserver(save).observe(notificationList, { childList: true })
 
     // delete after sended
     tootBtn.addEventListener('click', () => {
@@ -21,6 +23,6 @@ mountDrafter = () => {
     })
 }
 
-if (draftTextarea && tootBtn) { // is a Mastodon Web interface
+if (draftTextarea && tootBtn && notificationList) { // is Mastodon Web interface
     mountDrafter()
 }
